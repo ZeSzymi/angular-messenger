@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpModule } from '@angular/http';
 import { DisableEnterDirective } from './directives/disableEnter.directive';
 import { TemporaryComponent } from './temporary/temporary.component';
+import { RemoveMessengerService } from './services/remove-messenger.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { TemporaryComponent } from './temporary/temporary.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [AuthService, UsersService],
+  providers: [AuthService, RemoveMessengerService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

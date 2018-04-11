@@ -1,14 +1,15 @@
 import { AuthService } from './auth.service';
 import { Message } from './../message.model';
 import { Http, Response, Headers } from '@angular/http';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/interval';
+import { Observer } from 'rxjs/Observer';
 
 @Injectable()
-export class MessageService implements OnDestroy {
-    subscription: Subscription;
+export class MessageService {
     linkGet = 'http://localhost:3001/api/users/getdirs';
     linkPost = 'http://localhost:3001/api/users/create';
     messages: Message[] = [];
@@ -23,16 +24,8 @@ export class MessageService implements OnDestroy {
         this.userName = this.authService.getUser();
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-
     setSecondUser(user) {
         this.additionalUser = user;
-    }
-
-    onGetMessages() {
-        setInterval(() => this.getMessages(), 1000);
     }
 
     getMessages() {
@@ -54,7 +47,8 @@ export class MessageService implements OnDestroy {
                 this.messages = response.json();
                 this.messages.push(message);
                 this.onMessageChange.next(this.messages);
-                this.http.post(this.linkPost,{'fileName' : this.userName + '&' + this.additionalUser, 'messages': this.messages}).subscribe(
+                this.http.post(this.linkPost, {'fileName' : this.userName + '&' + this.additionalUser, 'messages': this.messages})
+                .subscribe(
                     (resp: Response) => {
                     }
                 );

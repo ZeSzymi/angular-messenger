@@ -1,8 +1,8 @@
-<div class="messenger ml-1">
-    <div class="messenger-head">
-        <a class='m-1'>{{ secondUser }}</a>
+<div class="messenger border-shadow ml-1" [ngClass]='{"visible": !collapse, "collapse" : collapse}' >
+    <div class="messenger-head text-white d-flex justify-content-between" (click)='collapse = true'>
+        <a class='m-1'>{{ secondUser }}</a> <a class='m-1'(click)='removeMessenger()'>x</a>
     </div>
-    <div class="messenger-body">
+    <div class="messenger-body" #scroll>
             <div class="p-2" *ngFor='let message of messages' [ngClass]= "{ 'message-right' : checkRightOrLeft(message.user), 'message-left' : !checkRightOrLeft(message.user) }" role="alert">
                     {{ message.content }}
             </div>
@@ -10,4 +10,7 @@
     <div class="messenger-footer">
         <textarea class="textarea" appDisableEnter #textArea></textarea>
     </div>
+</div>
+<div class="messenger-collapse text-white" [ngClass]='{"visible": collapse, "collapse": !collapse}'  (click)='collapse = false'>
+        <a class='m-2'>{{ secondUser }}</a>
 </div>

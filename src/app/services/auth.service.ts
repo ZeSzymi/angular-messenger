@@ -30,7 +30,6 @@ export class AuthService {
   }
 
   private checkAuthentication(): void {
-    console.log(localStorage.getItem('email'));
     this.userProfileEmail = localStorage.getItem('email');
   }
 
