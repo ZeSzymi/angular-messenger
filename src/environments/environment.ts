@@ -10,6 +10,6 @@ export const environment = {
     domain: 'urbanik.eu.auth0.com',
     audience: 'http://localhost:3001',
     redirect: 'http://localhost:4200/callback',
-    scope: 'openid profile email offline_access'
+    scope: 'openid profile email'
   }
 };

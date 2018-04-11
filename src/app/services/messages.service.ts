@@ -32,7 +32,7 @@ export class MessageService implements OnDestroy {
     }
 
     onGetMessages() {
-        setInterval(() => this.getMessages(), 3000);
+        setInterval(() => this.getMessages(), 1000);
     }
 
     getMessages() {

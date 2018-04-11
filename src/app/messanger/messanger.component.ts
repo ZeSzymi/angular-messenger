@@ -16,11 +16,11 @@ export class MessangerComponent implements OnInit {
   @Input() secondUser;
 
   ngOnInit() {
+    this.mainUser = this.authService.getUser();
     this.messageService.onMessageChange.subscribe(
       (messages) => {
         this.messages = messages.slice();
         this.messages.splice(0, 1);
-        console.log(messages);
       }
     );
     this.messageService.getMessages();

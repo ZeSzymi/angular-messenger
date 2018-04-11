@@ -10,87 +10,76 @@ export class AuthService {
   auth0 = new auth0.WebAuth({
     clientID: environment.auth.clientID,
     domain: environment.auth.domain,
-    responseType: 'token',
+    responseType: 'token id_token',
     redirectUri: environment.auth.redirect,
     audience: environment.auth.audience,
     scope: environment.auth.scope
   });
 
-  userProfile: any;
-  accessToken: string;
-  authenticated: boolean;
+  private userProfileEmail: any;
+  private accessToken: string;
+
   userProfileSubject = new Subject<string>();
 
-  constructor(private router: Router) {
-    this.getAccessToken();
+  constructor(public router: Router) {
+    this.checkAuthentication();
   }
 
-  login() {
+  public login(): void {
     this.auth0.authorize();
   }
 
-  handleLoginCallback() {
+  private checkAuthentication(): void {
+    console.log(localStorage.getItem('email'));
+    this.userProfileEmail = localStorage.getItem('email');
+  }
+
+  public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
-      console.log(authResult);
-      if (authResult && authResult.accessToken) {
+      if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
-        this.getUserInfo(authResult);
+        this.auth0.client.userInfo(authResult.accessToken, (error, profile) => {
+          this.userProfileEmail = profile.email;
+          this.setSession(authResult, profile);
+        });
       } else if (err) {
-        console.log(`Error: ${err.error}`);
-      }
-    });
-  }
-
-  getAccessToken() {
-    this.auth0.checkSession({}, (err, authResult) => {
-      if (authResult && authResult.accessToken) {
-        console.log(authResult);
-        this.getUserInfo(authResult);
-      } else if (err) {
+        this.router.navigate(['/home']);
         console.log(err);
-        this.logout();
-        this.authenticated = false;
       }
     });
   }
 
-  getUserInfo(authResult) {
-    this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
-      if (profile) {
-        this._setSession(authResult, profile);
-      }
-    });
+  private setSession(authResult, profile): void {
+    // Set the time that the Access Token will expire at
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('email', profile.email);
+    localStorage.setItem('expires_at', expiresAt);
+    this.router.navigate(['/users']);
   }
 
-  private _setSession(authResult, profile) {
-    const expTime = authResult.expiresIn * 1000 + Date.now();
-    localStorage.setItem('expires_at', JSON.stringify(expTime));
-    this.accessToken = authResult.accessToken;
-    this.userProfile = profile;
-    this.authenticated = true;
-    this.router.navigate(['/temporary']);
-  }
-
-  logout() {
+  public logout(): void {
+    // Remove tokens and expiry time from localStorage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-    this.userProfile = undefined;
-    this.accessToken = undefined;
-    this.authenticated = false;
+    // Go back to the home route
   }
 
-  get isLoggedIn(): boolean {
+  public get isAuthenticated(): boolean {
+    // Check whether the current time is past the
+    // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return Date.now() < expiresAt && this.authenticated;
+    return new Date().getTime() < expiresAt;
   }
 
   getUserName() {
-    console.log('herro');
-    this.userProfileSubject.next(this.userProfile.email);
+    this.userProfileSubject.next(this.userProfileEmail);
   }
 
   getUser() {
-    console.log(this.userProfile.email);
-    return this.userProfile.email;
+    return this.userProfileEmail;
 }
 
 }

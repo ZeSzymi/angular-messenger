@@ -30,6 +30,14 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  isAuth() {
+    console.log(this.authService.isAuthenticated);
+  }
+
+  isAuth2() {
+    this.authService.logout();
+  }
+
   openChat(userName) {
     this.messengers.push(userName);
   }

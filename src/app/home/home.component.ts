@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    localStorage.clear();
-    this.deleteAllCookies();
+    /*localStorage.clear();
+    this.deleteAllCookies();*/
     console.log('clear');
     this.authService.login();
   }
