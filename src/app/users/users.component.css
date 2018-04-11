@@ -1,0 +1,21 @@
+.container-fluid {
+    font-family: 'Merriweather', serif;
+}
+.colorsOdd {
+    color: rgb(172, 107, 43) !important;
+}
+.colorsOdd:hover{
+    color: rgb(131, 81, 32) !important;
+}
+
+.colorsEven {
+    color: rgb(172, 107, 43) !important;
+}
+
+.userColors {
+    color: rgb(142, 94, 255) !important;
+}
+.width {
+    width: 100% !important;
+    height: 250px;
+}
