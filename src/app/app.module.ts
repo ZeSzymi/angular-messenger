@@ -7,14 +7,14 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { MessangerComponent } from './messanger/messanger.component';
+import { MessangerComponent } from './users/messanger/messanger.component';
 import { UsersComponent } from './users/users.component';
 import { CallbackComponent } from './callback/callback.component';
 import { HomeComponent } from './home/home.component';
 import { HttpModule } from '@angular/http';
 import { DisableEnterDirective } from './directives/disableEnter.directive';
-import { TemporaryComponent } from './temporary/temporary.component';
 import { RemoveMessengerService } from './services/remove-messenger.service';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { RemoveMessengerService } from './services/remove-messenger.service';
     CallbackComponent,
     MessangerComponent,
     DisableEnterDirective,
-    TemporaryComponent
+    UserPanelComponent
   ],
   imports: [
     BrowserModule,

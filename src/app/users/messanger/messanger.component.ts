@@ -1,8 +1,8 @@
-import { Message } from './../message.model';
-import { MessageService } from './../services/messages.service';
-import { AuthService } from './../services/auth.service';
+import { Message } from './../../models/message.model';
+import { MessageService } from './../../services/messages.service';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
-import { RemoveMessengerService } from '../services/remove-messenger.service';
+import { RemoveMessengerService } from '../../services/remove-messenger.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -13,24 +13,34 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MessangerComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService,
-  private messageService: MessageService, private removeMessengerS: RemoveMessengerService) { }
+  private messageService: MessageService, private removeMessengerS: RemoveMessengerService) {}
+
   messages: Message[] = [];
   mainUser: string;
   collapse = false;
   interval;
+  state = false;
   onMessageSub = new Subscription();
   @Input() secondUser;
   @ViewChild('scroll') scroll;
+
   ngOnInit() {
     this.mainUser = this.authService.getUser();
+    this.messageService.getMessages();
     this.onMessageSub = this.messageService.onMessageChange.subscribe(
       (messages) => {
+        const beforeChange = this.messages.length;
         this.messages = messages.slice();
         this.messages.splice(0, 1);
-        this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
+        if (this.state) {
+          this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
+          this.state = false;
+        }
+        if (beforeChange < this.messages.length) {
+          this.state = true;
+        }
       }
     );
-    this.messageService.getMessages();
     this.interval = setInterval(() => this.messageService.getMessages(), 1000);
     this.messageService.setSecondUser(this.secondUser);
   }

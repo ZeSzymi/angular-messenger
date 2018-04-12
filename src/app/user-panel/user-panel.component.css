@@ -1,0 +1,38 @@
+.background {
+    width: 100%;
+    height: 100%;
+    text-overflow: clip;
+    background: rgba(56,87,224,1);
+background: -moz-linear-gradient(left, rgba(56,87,224,1) 0%, rgba(98,45,173,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(56,87,224,1)), color-stop(100%, rgba(98,45,173,1)));
+background: -webkit-linear-gradient(left, rgba(56,87,224,1) 0%, rgba(98,45,173,1) 100%);
+background: -o-linear-gradient(left, rgba(56,87,224,1) 0%, rgba(98,45,173,1) 100%);
+background: -ms-linear-gradient(left, rgba(56,87,224,1) 0%, rgba(98,45,173,1) 100%);
+background: linear-gradient(to right, rgba(56,87,224,1) 0%, rgba(98,45,173,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3857e0', endColorstr='#622dad', GradientType=1 );
+}
+
+
+.user-panel-list {
+    width: 100%;
+    height: 90%;
+    margin-top: 3%;
+    background: rgba(255, 255, 255, 0.548);
+}
+
+.user-over:hover {
+    color: rgb(66, 66, 66)!important 
+}
+
+.user-over {
+    font-size: 1.3em;
+    color: rgb(255, 255, 255) !important
+}
+
+.height {
+    height: 100%
+}
+
+.width {
+    width: 100%;
+}

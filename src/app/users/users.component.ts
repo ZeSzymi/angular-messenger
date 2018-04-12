@@ -1,7 +1,7 @@
 import { AuthService } from './../services/auth.service';
 import { UsersService } from './../services/users.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { User } from '../user.model';
+import { User } from '../models/user.model';
 import { RemoveMessengerService } from '../services/remove-messenger.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -14,11 +14,13 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   constructor(private usersService: UsersService, private authService: AuthService, private removeMessengerS: RemoveMessengerService) { }
   users: User[] = [];
-  messengers = [];
+  usersMessangers: User[] = [];
   userName = '';
+  image = 'https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png';
   onRemoveSub = new Subscription;
   ngOnInit() {
-    this.usersService.addUsers(new User(this.authService.getUser()));
+    this.usersService.addUsers(new User(this.authService.getUser(),
+    'https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png'));
     this.usersService.getUsers();
     this.removeMessenger();
     this.usersService.getUsersSubject.subscribe(
@@ -29,7 +31,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.authService.userProfileSubject.subscribe(
       (userName) => {
         this.userName = userName;
-        console.log(userName);
       }
     );
   }
@@ -37,10 +38,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   removeMessenger() {
     this.onRemoveSub = this.removeMessengerS.onRemoveMessage.subscribe(
       (name) => {
-        for (let i = 0; i < this.messengers.length; i += 1) {
-          console.log(i);
-          if (this.messengers[i] === name) {
-            this.messengers.splice(i, 1);
+        for (let i = 0; i < this.usersMessangers.length; i += 1) {
+          if (this.usersMessangers[i].email === name) {
+            this.usersMessangers.splice(i, 1);
           }
         }
       }
@@ -48,7 +48,15 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   openChat(userName) {
-    this.messengers.push(userName);
+    let state = true;
+    for (const userNamePicked of this.usersMessangers) {
+      if (userNamePicked.email === userName) {
+        state = false;
+      }
+    }
+    if (state) {
+      this.usersMessangers.push(new User(userName, ''));
+    }
   }
 
   checkIfEvenOrOdd(index): boolean {
@@ -65,7 +73,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.onRemoveSub.unsubscribe();
-    this.authService.logout();
   }
 
 }

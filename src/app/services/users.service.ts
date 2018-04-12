@@ -1,11 +1,13 @@
-import { User } from './../user.model';
+import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class UsersService {
+
     constructor(private http: Http) {}
+
     linkGet = 'http://localhost:3001/api/users/show';
     linkPost = 'http://localhost:3001/api/users/add';
     users: User[] = [];
@@ -43,7 +45,20 @@ export class UsersService {
     }
 
     postUsers(users) {
-        console.log(JSON.stringify(users));
         this.http.post(this.linkPost, users).subscribe();
+    }
+
+    changeImage(userName, image) {
+        this.http.get(this.linkGet).subscribe(
+            (response: Response) => {
+                const users = response.json();
+                for (const user of users) {
+                    if (user.name === userName) {
+                        user.image = image;
+                    }
+                }
+                this.http.post(this.linkPost, users);
+            }
+        );
     }
 }

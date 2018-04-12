@@ -1,7 +1,7 @@
 .messenger{
     width:251px ;
     height: 250px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.678);
     border: 0.5px solid rgb(194, 194, 194);
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
@@ -34,12 +34,12 @@
     border-top-right-radius: 7px;
     border-top:0.5px solid rgb(194, 194, 194);
     border-bottom:0.5px solid rgb(194, 194, 194);
-    background-color: rgb(190, 84, 252);
+    background-color: rgba(143, 84, 177, 0.623);
 }
 .messenger-body{
     width:100%; 
     height:170px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.445);
     overflow-y: scroll;
 }
 .messenger-footer{
@@ -61,7 +61,7 @@
     margin-top: 1%;
     font-size: 13px;
     width:80%;
-    background-color: rgb(218, 177, 124);
+    background-color: rgb(124, 180, 218);
     border-radius: 10px;
     float: right;
 }
@@ -69,7 +69,7 @@
     margin-top: 1%;
     font-size: 13px;
     width:80%;
-    background-color: rgb(238, 151, 151);
+    background-color: rgb(115, 194, 163);
     border-radius: 10px;
     float: left;
 }

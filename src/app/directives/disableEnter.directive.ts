@@ -1,7 +1,7 @@
 import { MessageService } from './../services/messages.service';
 import { Directive, HostListener, HostBinding, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Message } from '../message.model';
+import { Message } from '../models/message.model';
 
 @Directive({
   selector: '[appDisableEnter]'
