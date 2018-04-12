@@ -59,8 +59,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   }
 
+  logOut() {
+    this.authService.logout();
+  }
+
   ngOnDestroy() {
     this.onRemoveSub.unsubscribe();
+    this.authService.logout();
   }
 
 }

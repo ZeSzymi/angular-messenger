@@ -3,11 +3,12 @@
         <div class="row width height m-0">
             <div class="col-md-4">
                 <div class="user-panel text-white text-center">
+                        <img src='https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png' style='max-width: 150px' class="rounded-circle img-fluid align-self-center">
                     {{ userName }}
                 </div>
 
                 <div class="user-panel d-flex justify-content-center">
-                    <button class="btn btn-primary w-100">Log Out</button>
+                    <button class="btn btn-primary w-100" (click)='logOut()'>Log Out</button>
                 </div>
             </div>
             <div class="col-md-8">
