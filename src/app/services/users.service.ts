@@ -12,7 +12,7 @@ export class UsersService {
     linkPost = 'http://localhost:3001/api/users/add';
     users: User[] = [];
     getUsersSubject = new Subject<User[]>();
-
+    getCurrentUserSubject = new Subject<User>();
     addUsers(user: User) {
         let users: User[];
         let addUserStatus = true;
@@ -52,12 +52,29 @@ export class UsersService {
         this.http.get(this.linkGet).subscribe(
             (response: Response) => {
                 const users = response.json();
+                console.log(users);
                 for (const user of users) {
-                    if (user.name === userName) {
+                    console.log(user.email, userName);
+                    if (user.email === userName) {
                         user.image = image;
                     }
                 }
-                this.http.post(this.linkPost, users);
+                this.http.post(this.linkPost, users).subscribe();
+            }
+        );
+    }
+
+    getCurrentUser(userName) {
+        let users: User[];
+        console.log(userName);
+        this.http.get(this.linkGet).subscribe(
+            (response: Response) => {
+                users = response.json();
+                for (const user of users) {
+                    if (user.email === userName) {
+                        this.getCurrentUserSubject.next(user);
+                    }
+                }
             }
         );
     }

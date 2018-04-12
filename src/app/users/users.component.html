@@ -3,8 +3,8 @@
         <div class="row width height m-0">
             <div class="col-md-4">
                 <div class="user-panel-top text-white text-center">
-                        <img src='{{ image }}' style='max-width: 100px' class="rounded-circle img-fluid align-self-center">
-                        <p routerLink = '/user-panel' [queryParams]="{userName: userName, image: image}">{{ userName }}</p>
+                        <img src='{{ image }}' style='max-width: 150px' class="rounded-circle img-fluid align-self-center">
+                        <p routerLink = '/user-panel' [queryParams]="{userName: userName, image: image}" class="user-over">{{ userName }}</p>
                 </div>
 
                 <div class="user-panel-bottom d-flex justify-content-center">
@@ -16,7 +16,7 @@
                     <div style='overflow-y: scroll; height:100%'>
                         <div *ngFor='let user of users' class="pb-2">
                             <div class="user-item p-3 d-flex justify-content-between">
-                                <a class="text-white">chat with:</a> <a class="user-over" (click)='openChat(user.email)'>{{ user.email }}</a>
+                                <a class="user-over" (click)='openChat(user.email)'>Open Chat</a> <a class="user-over" routerLink = '/user-panel' [queryParams]="{userName: user.email, image: user.image}">See Profile</a><a class="user-over" (click)='openChat(user.email)'>{{ user.email }}</a>
                             </div>
                         </div>
                     </div>
@@ -28,4 +28,3 @@
 <div class="d-flex" style="position: absolute; bottom:0px; width:100%; left:0px; pointer-events: none;">
         <app-messanger class="d-flex flex-row-reverse" style="width:251px;height:100%; float:right; pointer-events: auto;" *ngFor='let secondUser of usersMessangers' [secondUser]='secondUser.email'></app-messanger>
 </div>
-

@@ -22,7 +22,6 @@
     position: absolute;
     bottom: 0px;
     height: 27px;
-    width: 20%;
     font-size: 0.8em;
     background-color: rgb(190, 84, 252);
 }
@@ -91,5 +90,3 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
-
-

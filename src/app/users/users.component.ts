@@ -33,6 +33,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.userName = userName;
       }
     );
+    this.getCurrentUser(this.userName);
   }
 
   removeMessenger() {
@@ -65,6 +66,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     } else {
       return false;
     }
+  }
+
+  getCurrentUser(email) {
+    this.usersService.getCurrentUser(email);
+    this.usersService.getCurrentUserSubject.subscribe(
+    (user) => this.image = user.image
+    );
   }
 
   logOut() {

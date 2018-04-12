@@ -4,20 +4,17 @@
             <div class="col-md-12 over-flow">
                 <div class="user-panel-list">
                   <div class="container d-flex justify-content-center">
-                      <img src='{{ image }}' style='max-width: 100px' class="rounded-circle img-fluid align-self-center mt-4">
+                      <img src='{{ image }}' style='max-width: 200px' class="rounded-circle img-fluid align-self-center mt-4">
                   </div>
                   <div class="container d-flex justify-content-center">
                       <a class="user-over mb-3">{{ userName }}</a>
                   </div>
                   <div class="container mt-3">
-                      <div class="col-md-12 d-flex justify-content-center text-white">
-                          <a class="user-over mb-3">change avatar</a>
-                      </div>
-                    <div class="col-md-12">
-                        <p><input class="form-control"></p>  
+                    <div class="col-md-12 mt-4">
+                        <p><input class="form-control" [(ngModel)]="image"></p>  
                     </div>
                     <div class="col-md-12 d-flex justify-content-end">
-                        <a class="user-over">change avatar</a>
+                        <a class="user-over" (click)='changeAvatar()'>change avatar</a>
                     </div>
                   </div>                  
                 </div>
