@@ -30,5 +30,5 @@ And messenger panel
 
 App is deployed to heroku and is fully usable 
 
-[I'm an inline-style link](https://floating-lake-53127.herokuapp.com/)
+https://floating-lake-53127.herokuapp.com/
 
