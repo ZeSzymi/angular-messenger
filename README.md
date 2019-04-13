@@ -1,16 +1,17 @@
-# Messanger
+## Messanger
 
 Simple messenger app.
 
-#Auth0
+## Auth0
+
 Authentication and Authorization is managed by Auth0
 
-#NodeJs
+## NodeJs
 
 Server REST API written in NodeJs is responsible for reciving messages, storing them and responsing to clients.
 Rest api is only reciving requests with authentication token.
 
-#Angular 5
+## Angular 5
 
 Frontend is written in Angular 5.
 There are three panels 
