@@ -25,3 +25,10 @@ And messenger panel
 
 ![alt text](https://raw.githubusercontent.com/ZeSzymi/angular-messenger/master/photos/messanger-panel.png)
 ![alt text](https://raw.githubusercontent.com/ZeSzymi/angular-messenger/master/photos/messanger-panel-closed.png)
+
+## Heroku
+
+App is deployed to heroku and is fully usable 
+
+[I'm an inline-style link](https://floating-lake-53127.herokuapp.com/)
+
