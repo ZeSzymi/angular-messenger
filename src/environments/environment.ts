@@ -6,10 +6,10 @@
 export const environment = {
   production: false,
   auth: {
-    clientID: '3XCJ4DRNhSmveJXKqpYlidQOVYIm3MwC',
+    clientID: 'X81FKcNm73RGh8Sha2giJVQHm0vCz0sh',
     domain: 'urbanik.eu.auth0.com',
-    audience: 'http://localhost:3001',
-    redirect: 'http://localhost:4200/callback',
+    audience: 'https://floating-lake-53127.herokuapp.com/',
+    redirect: 'https://floating-lake-53127.herokuapp.com/callback',
     scope: 'openid profile email'
   }
 };

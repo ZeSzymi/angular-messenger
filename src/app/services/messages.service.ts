@@ -10,8 +10,8 @@ import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class MessageService {
-    linkGet = 'http://localhost:3001/api/users/getdirs';
-    linkPost = 'http://localhost:3001/api/users/create';
+    linkGet = 'https://floating-lake-53127.herokuapp.com/api/users/getdirs';
+    linkPost = 'https://floating-lake-53127.herokuapp.com/api/users/create';
     messages: Message[] = [];
     messagesFinal: Message[] = [];
     additionalUser = 'test@test.com';

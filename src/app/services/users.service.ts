@@ -8,8 +8,8 @@ export class UsersService {
 
     constructor(private http: Http) {}
 
-    linkGet = 'http://localhost:3001/api/users/show';
-    linkPost = 'http://localhost:3001/api/users/add';
+    linkGet = 'https://floating-lake-53127.herokuapp.com/api/users/show';
+    linkPost = 'https://floating-lake-53127.herokuapp.com/api/users/add';
     users: User[] = [];
     getUsersSubject = new Subject<User[]>();
     getCurrentUserSubject = new Subject<User>();
